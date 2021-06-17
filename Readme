@@ -1,0 +1,33 @@
+Compilation
+---------------------------------------------------------------------------------------------------------
+MPI : 		mpicc –g –o mpi_conv mpi_image_conv.c –lm
+OpenMP+MPI : 	mpicc –g –fopenmp opmp_mpi_conv op_mpi_image.c -lm
+
+
+Execution (examples)
+---------------------------------------------------------------------------------------------------------
+MPI : 		mpiexec –f machines –np 8 ./mpi_conv waterfall_1920_2520.raw 2520 1920 30 2 grey
+OpenMP+MPI : 	mpiexec –f ompmachines –np 8 ./opmp_mpi_conv waterfall_1920_2520.raw 2520 1920 30 2
+grey
+
+
+Execution - Input
+----------------------------------------------------------------------------------------------------------
+Each run (in both MPI & OpenMP+MPI executables) needs to be givev as arguments the following :
+
+[imageName] [rows number] [columns number] [max iterations] [check convergence iterations] [type of image (grey/rgb)]
+
+
+Execution - Output
+-----------------------------------------------------------------------------------------------------------
+Each run if succesfull produces :
+
+a) A converted image file with full name  "conv_" & imageName
+
+b) A log file (.mpi_log / .omp_mpi_log for each case) which appends to existent file (or creating new if does not exist) the following : 
+RunDate ImageName Rows Cols MaxIterations ConvergenceIterations NumProcesses NumThreads(if used) RunTime ReadTime WriteTime
+
+
+Scripts
+---------------------------------------------------------------------------------------------------------
+Scripts (tcsh) given are not for the whole testing. Better one to customize for his/her needs
